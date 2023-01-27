@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-
 @main
+
 struct To_do_list_2App: App {
     var body: some Scene {
         WindowGroup {

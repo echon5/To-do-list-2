@@ -25,35 +25,36 @@ struct ContentView: View {
                         Text(item.dueDate, style: .date)
                     }
                 }
-                    .onMove { indices, newOffset in
-                        toDoList.items.move(fromOffsets: indices, toOffset: newOffset)
-                    }
-                    .onDelete { indexSet in
-                        toDoList.items.remove(atOffsets: indexSet)
-                    }
+                .onMove { indices, newOffset in
+                    toDoList.items.move(fromOffsets: indices, toOffset: newOffset)
                 }
+                .onDelete { indexSet in
+                    toDoList.items.remove(atOffsets: indexSet)
+                }
+            }
             .sheet(isPresented: $showingAddItemView, content: {
                 AddedItemView(toDoList: toDoList)
             })
-                .navigationBarTitle("To Do List", displayMode: .inline)
-                .navigationBarItems(leading: EditButton (),
-                trailing: Button(action: {
-                    showingAddItemView = true}) {
-                        Image(systemName : "plus")
+            .navigationBarTitle("To Do List", displayMode: .inline)
+            .navigationBarItems(leading: EditButton (),
+                                trailing: Button(action: {
+                showingAddItemView = true}) {
+                    Image(systemName : "plus")
                 })
-            }
         }
     }
-        struct ContentView_Previews: PreviewProvider {
-            static var previews: some View {
-                ContentView()
-            }
-        }
-        
-        struct ToDoItem: Identifiable, Codable {
-            var id = UUID()
-            var priority = String ()
-            var description = String ()
-            var dueDate = Date ()
-        }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+struct ToDoItem: Identifiable, Codable {
+    var id = UUID()
+    var priority = String ()
+    var description = String ()
+    var dueDate = Date ()
+}
 
